@@ -1,0 +1,65 @@
+//------------------------------------------------
+//--- 010 Editor v7.0 Binary Template
+//
+//      File: WEMFile Wwise Audio
+//   Authors: Rickvg
+//   Version: 0.01
+//   Purpose: Planet coaster WEM-File structure analysis
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+typedef struct{
+    char ckid[4];
+    uint32 ckSize;
+    uint32 WAVEID;
+}WEMHeader;
+
+typedef struct{
+    char type[4];
+    uint32 size;
+}RIFFChunk;
+
+typedef struct{
+    uint16 format_tag;
+    uint16 channels;
+    uint32 samples_per_sec;
+    uint32 avg_bytes_per_sec;
+    uint16 blockalign;
+    uint16 bits_per_sample;
+    uint16 size;
+    uint16 valid_bits_per_sample;
+    uint32 channel_mask;
+    char guid[42];
+}FMTChunk;
+
+typedef struct{
+    uint32 cueCount;
+}CUEChunk;
+
+typedef struct{
+    char JUNK[26];
+}JUNKChunk;
+
+typedef struct{
+    char data[riffchunk.size];
+}DataChunk;
+
+
+WEMHeader wemheader;
+
+local int k = 0;
+
+while (k == 0) {
+    RIFFChunk riffchunk;
+    if (riffchunk.type == "fmt "){
+        FMTChunk fmtchunk;
+    }else if (riffchunk.type == "JUNK"){
+        JUNKChunk junkchunk;
+    }else if (riffchunk.type == "data"){
+        k = 1;
+    }   
+}
+DataChunk datachunk;

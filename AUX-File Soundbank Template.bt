@@ -1,0 +1,112 @@
+//------------------------------------------------
+//--- 010 Editor v7.0 Binary Template
+//
+//      File: Aux files
+//   Authors: Rickvg
+//   Version: 0.01
+//   Purpose: Structing auxiliary files for Planet Coaster
+//  Category: 
+// File Mask: *.aux
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+typedef enum <ubyte> {
+    False,
+    True
+} bool;
+
+//Fileheader
+typedef struct Header{
+    uint magicNumber;
+    uint32 headerlength;
+    uint32 version;
+    uint32 soundbankid;
+}HEADER;
+
+HEADER header;
+
+//Unknown headers 2 of them should be zero
+local int currentPos = 8;
+while (currentPos < header.headerlength){
+    uint32 UnknownShouldbeZero;
+    currentPos = currentPos + 4;
+}
+
+//WEM File definitions
+typedef struct {
+    uint32 fileID;
+    uint32 offsetDATA;
+    uint32 fileLength;
+} WEMID;
+
+
+
+//DIDX Header
+typedef struct DataIndex{
+    uint magicNumber;
+    uint32 chunkLength;
+}DATAINDEX;
+
+DATAINDEX dataindex;
+
+// Amount of embedded WEM-files: chunkLength / 12
+if (dataindex.chunkLength > 0) {
+    local int wemCount = dataindex.chunkLength / 12;
+    WEMID wemids[wemCount];
+}
+
+
+//DATA Header
+typedef struct{
+    uint magicNumber;
+    uint32 chunkLength;
+}WEMDATA;
+
+WEMDATA wemdata;
+local int64 DataPos = FTell();
+//Actual WEM Files
+typedef struct{
+    char wemdatafiles[wemids[i].fileLength];
+}WEMDATAGET;
+
+//Need length given in WEMID.fileLength
+if (wemdata.chunkLength > 0) {
+    local int i = 0;
+    local int j = 0;
+    local int k = 0;
+    WEMDATAGET wemactualdata;
+    for (i=1; i < wemCount; i++){
+        FSeek(DataPos + wemids[i].offsetDATA);
+        WEMDATAGET wemactualdata;   
+    }
+}
+
+//HIRC Header
+typedef struct{
+    uint magicNumber;
+    uint32 sectionLength;
+    uint32 objectCount;
+}HIRCHeader;
+
+HIRCHeader hircheader;
+
+//HIRC Objects
+typedef struct{
+    uchar ObjectType;
+    uint32 ObjectLength;
+    uint32 ObjectID;
+}HIRCOBJECTS;
+
+
+//ObjectContent
+typedef struct{
+    char ObjectContent[hircobjects.ObjectLength-4];
+}OBJECTCONTENT;
+
+if (hircheader.objectCount > 0){
+    local int p = 0;
+    for (p=0; p < hircheader.objectCount; p++){
+        HIRCOBJECTS hircobjects;
+        OBJECTCONTENT objectcontent;
+    }
+}
